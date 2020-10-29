@@ -1,0 +1,21 @@
+import mongoose from 'mongoose';
+
+const UserSchema = new mongoose.Schema({
+  nome: String,
+  email: String,
+  senha: String,
+  telefones: [{
+    numero: String,
+    ddd: String,
+  }],
+  ultimo_login: Date,
+}, {
+  timestamps: {
+    createdAt: 'data_criacao',
+    updatedAt: 'data_atualizacao',
+  },
+});
+
+const UserModel = mongoose.model('User', UserSchema);
+
+export default UserModel;
