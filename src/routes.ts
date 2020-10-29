@@ -1,5 +1,6 @@
 import { Request, Response, Router } from 'express';
 import UserController from './controllers/userController';
+import AuthMiddleware from './middleware/auth';
 
 export default class Routes {
   routes: Router;
@@ -14,6 +15,8 @@ export default class Routes {
 
   user() {
     this.routes.post('/user', UserController.signUp);
-    this.routes.post('/login/user', UserController.signIn);
+    this.routes.post('/signin/user', UserController.signIn);
+
+    this.routes.get('/user/:user_id', AuthMiddleware.authenticate, UserController.getUser);
   }
 }
