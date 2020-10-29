@@ -10,7 +10,7 @@ export default class Server {
 
   constructor() {
     this.app = express();
-    this.database = new Database();
+    this.database = Database.connect();
   }
 
   routes() {

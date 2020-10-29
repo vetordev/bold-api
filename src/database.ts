@@ -2,13 +2,21 @@ import mongoose from 'mongoose';
 import config from './config/config';
 
 export default class Database {
-  constructor() {
+  static async connect() {
     try {
-      mongoose.connect(config.mongoURL, {
+      return await mongoose.connect(config.mongoURL, {
         useNewUrlParser: true,
         useUnifiedTopology: true,
         useFindAndModify: false,
       });
+    } catch (error) {
+      return error;
+    }
+  }
+
+  static async disconnect() {
+    try {
+      return await mongoose.disconnect();
     } catch (error) {
       return error;
     }
