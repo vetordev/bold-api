@@ -2,12 +2,13 @@ import { Request, Response } from 'express';
 import generateTokenJwt from './utils/generateTokenJwt';
 import User from '../models/user';
 import emailExits from './utils/emailExists';
+import hashPassword from './utils/hashPassword';
 
 export default class UserController {
   static async signIn(request: Request, response: Response) {
     const { email, senha } = request.body;
 
-    let user = await User.findOne({ email, senha });
+    let user = await User.findOne({ email, senha: hashPassword(senha) });
 
     if (!await emailExits(email)) {
       return response.status(401).json({ mensagem: 'Usuário e/ou senha inválidos' });
@@ -18,7 +19,7 @@ export default class UserController {
     }
 
     user = await User.findOneAndUpdate({
-      email, senha,
+      email, senha: hashPassword(senha),
     }, {
       ultimo_login: new Date(),
     });
@@ -31,7 +32,7 @@ export default class UserController {
     } = request.body;
 
     if (await emailExits(email)) {
-      return response.status(400).json({ mensagem: 'Email já existente.' });
+      return response.status(400).json({ mensagem: 'E-mail já existente.' });
     }
 
     const token = generateTokenJwt(email);
@@ -39,7 +40,7 @@ export default class UserController {
     const user = await User.create({
       nome,
       email,
-      senha,
+      senha: hashPassword(senha),
       telefones,
       ultimo_login: new Date(),
       token,

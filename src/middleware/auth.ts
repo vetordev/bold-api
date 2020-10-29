@@ -12,6 +12,7 @@ export default class AuthMiddleware {
 
     const token = authHeader.split(' ')[1];
 
+    // eslint-disable-next-line consistent-return
     jwt.verify(token, config.jwtSecret, (error) => {
       if (error) {
         return response.status(401).send({ mensagem: 'Não autorizado.' });

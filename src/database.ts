@@ -7,6 +7,7 @@ export default class Database {
       mongoose.connect(config.mongoURL, {
         useNewUrlParser: true,
         useUnifiedTopology: true,
+        useFindAndModify: false,
       });
     } catch (error) {
       return error;
