@@ -6,6 +6,7 @@ dotenv.config({
 
 const config = {
   port: process.env.PORT || 3333,
+  mongoURL: process.env.MONGO_URL,
 };
 
 export default config;
