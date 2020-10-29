@@ -9,6 +9,7 @@ const UserSchema = new mongoose.Schema({
     ddd: String,
   }],
   ultimo_login: Date,
+  token: String,
 }, {
   timestamps: {
     createdAt: 'data_criacao',
