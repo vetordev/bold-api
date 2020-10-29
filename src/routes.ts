@@ -1,4 +1,5 @@
 import { Request, Response, Router } from 'express';
+import UserController from './controllers/userController';
 
 export default class Routes {
   routes: Router;
@@ -12,8 +13,7 @@ export default class Routes {
   }
 
   user() {
-    this.routes.get('/user', (request: Request, response: Response) => {
-      response.json('Usuário');
-    });
+    this.routes.post('/user', UserController.signUp);
+    this.routes.post('/login/user', UserController.signIn);
   }
 }
