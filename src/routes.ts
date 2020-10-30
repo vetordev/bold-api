@@ -9,7 +9,7 @@ export default class Routes {
     this.routes = Router();
 
     this.routes.get('/', (request: Request, response: Response) => {
-      response.json('Hello');
+      response.json('API para teste na BOLD - Vitor da Silva Pires Bezerra');
     });
   }
 

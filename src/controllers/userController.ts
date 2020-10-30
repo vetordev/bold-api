@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import generateTokenJwt from './utils/generateTokenJwt';
 import User from '../models/user';
-import emailExits from './utils/emailExists';
+import emailExists from './utils/emailExists';
 import hashPassword from './utils/hashPassword';
 
 export default class UserController {
@@ -10,7 +10,7 @@ export default class UserController {
 
     let user = await User.findOne({ email, senha: hashPassword(senha) });
 
-    if (!await emailExits(email)) {
+    if (!await emailExists(email)) {
       return response.status(401).json({ mensagem: 'Usuário e/ou senha inválidos.' });
     }
 
@@ -31,7 +31,7 @@ export default class UserController {
       nome, email, senha, telefones,
     } = request.body;
 
-    if (await emailExits(email)) {
+    if (await emailExists(email)) {
       return response.status(400).json({ mensagem: 'E-mail já existente.' });
     }
 

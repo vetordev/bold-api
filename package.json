@@ -1,7 +1,7 @@
 {
   "name": "bold-api",
   "version": "0.10.0",
-  "description": "API para teste na BOLD",
+  "description": "API para teste na BOLD - Vitor da Silva Pires Bezerra",
   "main": "index.js",
   "scripts": {
     "build": "babel src --extensions \".js,.ts\" --out-dir dist --copy-files --no-copy-ignored",
