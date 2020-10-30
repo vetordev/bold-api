@@ -7,6 +7,7 @@ const UserSchema = new mongoose.Schema({
   telefones: [{
     numero: String,
     ddd: String,
+    _id: false,
   }],
   ultimo_login: Date,
   token: String,

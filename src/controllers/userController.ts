@@ -11,11 +11,11 @@ export default class UserController {
     let user = await User.findOne({ email, senha: hashPassword(senha) });
 
     if (!await emailExits(email)) {
-      return response.status(401).json({ mensagem: 'Usuário e/ou senha inválidos' });
+      return response.status(401).json({ mensagem: 'Usuário e/ou senha inválidos.' });
     }
 
     if (!user) {
-      return response.status(401).json({ mensagem: 'Usuário e/ou senha inválidos' });
+      return response.status(401).json({ mensagem: 'Usuário e/ou senha inválidos.' });
     }
 
     user = await User.findOneAndUpdate({
@@ -53,7 +53,12 @@ export default class UserController {
     const authentication = request.headers.authentication as string;
     const token = authentication.split(' ')[1];
 
-    const user: any = await User.findById(request.params.user_id);
+    let user: any;
+    try {
+      user = await User.findById(request.params.user_id);
+    } catch (error) {
+      user = undefined;
+    }
     const date: any = new Date();
 
     if (!user) {
@@ -71,4 +76,3 @@ export default class UserController {
     return response.status(200).json(user);
   }
 }
-// 17:57
