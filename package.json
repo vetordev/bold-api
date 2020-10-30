@@ -1,11 +1,11 @@
 {
   "name": "bold-api",
   "version": "0.10.0",
-  "description": "",
+  "description": "API para teste na BOLD",
   "main": "index.js",
   "scripts": {
     "build": "babel src --extensions \".js,.ts\" --out-dir dist --copy-files --no-copy-ignored",
-    "start": "node dist/server.js",
+    "start": "node dist/main.js",
     "test": "jest --runInBand",
     "dev": "ts-node-dev -r tsconfig-paths/register --respawn --ignore-watch node_modules --no-notify src/main.ts"
   },
